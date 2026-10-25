@@ -4,6 +4,10 @@ A Mac app that tells you what an AI film made with [Higgsfield](https://higgsfie
 
 > **Unofficial community project.** Not affiliated with, endorsed by or connected to Higgsfield. "Higgsfield" and "Seedance" are names of their respective owners and are used here only to describe what the calculator calculates. No Higgsfield logos, icons or images are included.
 
+![The calculator: inputs on the left; on the right the cost of your choice, the credit packages to buy and all production paths compared](docs/bilder/app-uebersicht.png)
+
+<sub>Screenshots show sample data. The interface is in German — see [Language](#language).</sub>
+
 Built entirely with [Claude Code](https://claude.com/claude-code), and meant to be **rebuilt and adapted with Claude Code**: the repository contains not just the code but the full specification, calculation rules, build plan and decision log that Claude Code used to build it. Open the folder in Claude Code and it understands the whole project.
 
 ## Language
@@ -12,8 +16,12 @@ The app, its documentation and its code comments are in **German** (the author's
 
 ## What it does
 
+![Changing the attempts per clip: the price counts to its new value and a badge shows the difference](docs/bilder/preis-animation.gif)
+
 - **One number for your choice.** Enter what is still open in your film (duration or number of clips), the video model, resolution, attempts per clip, the image model for stills and references, and your current credit balance. The app shows the gross cost in euros, the credits you need and exactly which credit packages to buy.
-- **Every production path compared.** All models and resolutions, ranked by cost per quality point, with the difference to your choice.
+- **Every production path compared.** All models and resolutions, ranked by cost per quality point, with the difference to your choice. Expand a row to see why it is recommended and what you would have to buy.
+
+  ![An expanded production path with its reasoning, credit needs and packages to buy](docs/bilder/vergleichsliste.png)
 - **Multiple projects.** Save films as projects and add several of them up, counting your credit balance only once.
 - **Three ways to use one calculation core:**
   - the **Mac app** (Tauri),
