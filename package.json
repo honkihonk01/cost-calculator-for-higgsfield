@@ -1,0 +1,47 @@
+{
+  "name": "cost-calculator-for-higgsfield",
+  "private": true,
+  "license": "MIT",
+  "version": "0.1.0",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri",
+    "test": "vitest run",
+    "lint": "biome lint .",
+    "check": "tsc && biome check .",
+    "bundle": "node scripts/bundle-cli.ts",
+    "install:local": "node scripts/bundle-cli.ts && node dist-cli/hfcalc.mjs einrichten"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "@tauri-apps/api": "2.12.1",
+    "@tauri-apps/plugin-fs": "~2.6.0",
+    "@tauri-apps/plugin-http": "~2.8.1",
+    "big.js": "7.0.1",
+    "commander": "15.0.0",
+    "radix-ui": "1.7.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.15",
+    "@tauri-apps/cli": "2.12.1",
+    "@testing-library/react": "16.3.3",
+    "@types/big.js": "7.0.0",
+    "@types/node": "^24.19.1",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "6.1.2",
+    "jsdom": "30.1.2",
+    "typescript": "~6.0.3",
+    "vite": "8.3.4",
+    "vitest": "5.0.3"
+  }
+}

@@ -1,0 +1,290 @@
+{
+  "vatPercent": 19,
+  "expiryDays": 90,
+  "packages": [
+    {
+      "credits": 100,
+      "regular": {
+        "status": "known",
+        "value": 8.5,
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Kauf-Fenster „Credits aufladen“ im Konto, Tarif Ultra (docs/SPEC.md, Entscheidung 1)"
+      },
+      "discounted": {
+        "status": "known",
+        "value": 6.25,
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Kauf-Fenster „Credits aufladen“ im Konto, Tarif Ultra (docs/SPEC.md, Entscheidung 1)"
+      }
+    },
+    {
+      "credits": 200,
+      "regular": {
+        "status": "known",
+        "value": 17,
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Kauf-Fenster „Credits aufladen“ im Konto, Tarif Ultra (docs/SPEC.md, Entscheidung 1)"
+      },
+      "discounted": {
+        "status": "known",
+        "value": 12,
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Kauf-Fenster „Credits aufladen“ im Konto, Tarif Ultra (docs/SPEC.md, Entscheidung 1)"
+      }
+    },
+    {
+      "credits": 500,
+      "regular": {
+        "status": "known",
+        "value": 42.5,
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Kauf-Fenster „Credits aufladen“ im Konto, Tarif Ultra (docs/SPEC.md, Entscheidung 1)"
+      },
+      "discounted": {
+        "status": "known",
+        "value": 26,
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Kauf-Fenster „Credits aufladen“ im Konto, Tarif Ultra (docs/SPEC.md, Entscheidung 1)"
+      }
+    },
+    {
+      "credits": 1000,
+      "regular": {
+        "status": "known",
+        "value": 85,
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Kauf-Fenster „Credits aufladen“ im Konto, Tarif Ultra (docs/SPEC.md, Entscheidung 1)"
+      },
+      "discounted": {
+        "status": "known",
+        "value": 49,
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Kauf-Fenster „Credits aufladen“ im Konto, Tarif Ultra (docs/SPEC.md, Entscheidung 1)"
+      }
+    },
+    {
+      "credits": 2000,
+      "regular": {
+        "status": "known",
+        "value": 170,
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Kauf-Fenster „Credits aufladen“ im Konto, Tarif Ultra (docs/SPEC.md, Entscheidung 1)"
+      },
+      "discounted": {
+        "status": "known",
+        "value": 95,
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Kauf-Fenster „Credits aufladen“ im Konto, Tarif Ultra (docs/SPEC.md, Entscheidung 1)"
+      }
+    },
+    {
+      "credits": 4000,
+      "regular": {
+        "status": "known",
+        "value": 340,
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Kauf-Fenster „Credits aufladen“ im Konto, Tarif Ultra (docs/SPEC.md, Entscheidung 1)"
+      },
+      "discounted": {
+        "status": "known",
+        "value": 190,
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Kauf-Fenster „Credits aufladen“ im Konto, Tarif Ultra (docs/SPEC.md, Entscheidung 1)"
+      }
+    },
+    {
+      "credits": 5000,
+      "regular": {
+        "status": "known",
+        "value": 425,
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Kauf-Fenster „Credits aufladen“ im Konto, Tarif Ultra (docs/SPEC.md, Entscheidung 1)"
+      },
+      "discounted": {
+        "status": "known",
+        "value": 235,
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Kauf-Fenster „Credits aufladen“ im Konto, Tarif Ultra (docs/SPEC.md, Entscheidung 1)"
+      }
+    },
+    {
+      "credits": 7000,
+      "regular": {
+        "status": "unknown",
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Reglerstufe im Kauf-Fenster „Credits aufladen“; Preis nicht abgelesen (docs/SPEC.md, Entscheidung 1)"
+      },
+      "discounted": {
+        "status": "unknown",
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Reglerstufe im Kauf-Fenster „Credits aufladen“; Preis nicht abgelesen (docs/SPEC.md, Entscheidung 1)"
+      }
+    },
+    {
+      "credits": 9000,
+      "regular": {
+        "status": "unknown",
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Reglerstufe im Kauf-Fenster „Credits aufladen“; Preis nicht abgelesen (docs/SPEC.md, Entscheidung 1)"
+      },
+      "discounted": {
+        "status": "unknown",
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Reglerstufe im Kauf-Fenster „Credits aufladen“; Preis nicht abgelesen (docs/SPEC.md, Entscheidung 1)"
+      }
+    },
+    {
+      "credits": 11000,
+      "regular": {
+        "status": "unknown",
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Reglerstufe im Kauf-Fenster „Credits aufladen“; Preis nicht abgelesen (docs/SPEC.md, Entscheidung 1)"
+      },
+      "discounted": {
+        "status": "unknown",
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Reglerstufe im Kauf-Fenster „Credits aufladen“; Preis nicht abgelesen (docs/SPEC.md, Entscheidung 1)"
+      }
+    },
+    {
+      "credits": 13000,
+      "regular": {
+        "status": "unknown",
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Reglerstufe im Kauf-Fenster „Credits aufladen“; Preis nicht abgelesen (docs/SPEC.md, Entscheidung 1)"
+      },
+      "discounted": {
+        "status": "unknown",
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Reglerstufe im Kauf-Fenster „Credits aufladen“; Preis nicht abgelesen (docs/SPEC.md, Entscheidung 1)"
+      }
+    },
+    {
+      "credits": 15000,
+      "regular": {
+        "status": "unknown",
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Reglerstufe im Kauf-Fenster „Credits aufladen“; Preis nicht abgelesen (docs/SPEC.md, Entscheidung 1)"
+      },
+      "discounted": {
+        "status": "unknown",
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Reglerstufe im Kauf-Fenster „Credits aufladen“; Preis nicht abgelesen (docs/SPEC.md, Entscheidung 1)"
+      }
+    },
+    {
+      "credits": 17000,
+      "regular": {
+        "status": "unknown",
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Reglerstufe im Kauf-Fenster „Credits aufladen“; Preis nicht abgelesen (docs/SPEC.md, Entscheidung 1)"
+      },
+      "discounted": {
+        "status": "unknown",
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Reglerstufe im Kauf-Fenster „Credits aufladen“; Preis nicht abgelesen (docs/SPEC.md, Entscheidung 1)"
+      }
+    },
+    {
+      "credits": 19000,
+      "regular": {
+        "status": "unknown",
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Reglerstufe im Kauf-Fenster „Credits aufladen“; Preis nicht abgelesen (docs/SPEC.md, Entscheidung 1)"
+      },
+      "discounted": {
+        "status": "unknown",
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Reglerstufe im Kauf-Fenster „Credits aufladen“; Preis nicht abgelesen (docs/SPEC.md, Entscheidung 1)"
+      }
+    },
+    {
+      "credits": 21000,
+      "regular": {
+        "status": "unknown",
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Reglerstufe im Kauf-Fenster „Credits aufladen“; Preis nicht abgelesen (docs/SPEC.md, Entscheidung 1)"
+      },
+      "discounted": {
+        "status": "unknown",
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Reglerstufe im Kauf-Fenster „Credits aufladen“; Preis nicht abgelesen (docs/SPEC.md, Entscheidung 1)"
+      }
+    },
+    {
+      "credits": 23000,
+      "regular": {
+        "status": "unknown",
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Reglerstufe im Kauf-Fenster „Credits aufladen“; Preis nicht abgelesen (docs/SPEC.md, Entscheidung 1)"
+      },
+      "discounted": {
+        "status": "unknown",
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Reglerstufe im Kauf-Fenster „Credits aufladen“; Preis nicht abgelesen (docs/SPEC.md, Entscheidung 1)"
+      }
+    },
+    {
+      "credits": 25000,
+      "regular": {
+        "status": "unknown",
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Reglerstufe im Kauf-Fenster „Credits aufladen“; Preis nicht abgelesen (docs/SPEC.md, Entscheidung 1)"
+      },
+      "discounted": {
+        "status": "unknown",
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Reglerstufe im Kauf-Fenster „Credits aufladen“; Preis nicht abgelesen (docs/SPEC.md, Entscheidung 1)"
+      }
+    },
+    {
+      "credits": 100000,
+      "regular": {
+        "status": "unknown",
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Reglerstufe im Kauf-Fenster „Credits aufladen“; Preis nicht abgelesen (docs/SPEC.md, Entscheidung 1)"
+      },
+      "discounted": {
+        "status": "unknown",
+        "unit": "USD",
+        "asOf": "2026-10-09",
+        "source": "Reglerstufe im Kauf-Fenster „Credits aufladen“; Preis nicht abgelesen (docs/SPEC.md, Entscheidung 1)"
+      }
+    }
+  ]
+}

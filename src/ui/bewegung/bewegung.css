@@ -1,0 +1,126 @@
+/* Bewegung nach dem Prototyp „Angebotsrechner“ (docs/UI-RULES.md §11). Nur Token aus src/styles/tokens.css.
+   Die Klassen setzt src/ui/bewegung/aufbau.ts; „Bewegung reduzieren“ schaltet alles in global.css ab. */
+
+/* ---------- Zählende Zahl: Screenreader lesen nur den fertigen Text ---------- */
+.zahl__lesbar {
+  position: absolute;
+  width: var(--border-width);
+  height: var(--border-width);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- Aufbau des Fensters: Fläche zuerst, dann ihre Elemente einzeln, treppenartig ---------- */
+.bau-wartet {
+  opacity: 0;
+}
+.bau-flaeche.bau-los {
+  animation: flaeche-links var(--duration-flaeche) var(--ease-flaeche) both;
+  animation-delay: var(--bau-d);
+}
+.bau-flaeche.bau-los.bau-von-oben {
+  animation-name: flaeche-oben;
+  animation-duration: var(--duration-flaeche-hoch);
+}
+.bau-atom.bau-los {
+  animation: atom-auf var(--duration-atom) var(--ease-aus) both;
+  animation-delay: var(--bau-d);
+}
+.bau-atom.bau-los.bau-blende {
+  animation-name: blende;
+}
+.bau-atom.bau-los.bau-fein {
+  animation-name: blende;
+  animation-duration: var(--duration-atom-fein);
+}
+.bau-atom.bau-los.bau-wisch {
+  animation-name: aufdecken;
+  animation-duration: var(--duration-wisch);
+}
+
+/* ---------- Aufklappen, Umschalten, Reiterwechsel: der neue Inhalt erscheint Element für Element ---------- */
+.auf-stufe {
+  animation: atom-auf var(--duration-atom) var(--ease-aus) both;
+  animation-delay: var(--auf-d);
+}
+.auf-stufe.auf-blende {
+  animation-name: blende;
+}
+.auf-stufe.auf-wisch {
+  animation-name: aufdecken;
+  animation-duration: var(--duration-wisch);
+}
+
+@keyframes flaeche-links {
+  from {
+    clip-path: inset(0 100% 0 0 round var(--bau-rr, 0));
+  }
+  to {
+    clip-path: inset(0 0 0 0 round var(--bau-rr, 0));
+  }
+}
+@keyframes flaeche-oben {
+  from {
+    clip-path: inset(0 0 100% 0 round var(--bau-rr, 0));
+  }
+  to {
+    clip-path: inset(0 0 0 0 round var(--bau-rr, 0));
+  }
+}
+@keyframes atom-auf {
+  from {
+    opacity: 0;
+    transform: translateY(var(--move-atom));
+    filter: blur(var(--blur-atom));
+  }
+}
+@keyframes blende {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes aufdecken {
+  from {
+    clip-path: inset(0 100% 0 0 round var(--radius-6));
+  }
+  to {
+    clip-path: inset(0 0 0 0 round var(--radius-6));
+  }
+}
+
+/* ---------- Gleitende Markierung hinter dem gewählten Feld (Pill-Reiter B4, Segment B5) ---------- */
+.pills,
+.segment {
+  position: relative;
+  isolation: isolate;
+}
+.markierung {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: var(--color-text-white);
+  box-shadow: var(--shadow-segment);
+  transition:
+    transform var(--duration-gleiten) var(--ease-feder),
+    width var(--duration-gleiten) var(--ease-feder),
+    height var(--duration-gleiten) var(--ease-feder),
+    opacity var(--duration-micro) var(--ease-standard);
+}
+.markierung[data-leer] {
+  opacity: 0;
+}
+.pills > .markierung {
+  border-radius: var(--radius-full);
+}
+.segment > .markierung {
+  border-radius: var(--radius-12);
+}
+.pills[data-markierung] > button[data-state="checked"],
+.pills[data-markierung] > button[data-state="active"],
+.segment[data-markierung] > button[data-state="checked"] {
+  background: transparent;
+  box-shadow: none;
+}

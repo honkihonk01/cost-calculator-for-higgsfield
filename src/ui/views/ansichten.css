@@ -1,0 +1,368 @@
+/* Aufbau von Eingabespalte und Ergebnisbereich (docs/UI-RULES.md, Abschnitt A). Nur Token. */
+
+.input-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.field-group__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+.input-form > div,
+.labelled {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.notes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* Eingabespalte: Projektwahl oben, Felder, Lime-Hauptaktion unten (Skizze in Abschnitt A) */
+.input-column__stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+.save-project {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.save-project p {
+  margin: 0;
+}
+.save-project__hint {
+  color: var(--color-font-secondary);
+}
+.save-project__status:empty {
+  display: none;
+}
+.dialog__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.project-menu {
+  min-width: var(--radix-select-trigger-width);
+}
+.menu__status {
+  margin: 0;
+  padding: var(--space-1-5) var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: var(--text-12);
+  line-height: var(--leading-12);
+}
+
+/* Ergebnisbereich: Antwort oben, darunter die Reiter */
+.result-area__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+.tab-intro {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+.value-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.value-group h3 {
+  margin: 0;
+}
+
+/* ---------- B12 Ergebniskarte (oberste Antwort) ---------- */
+.answer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.answer p {
+  margin: 0;
+}
+.answer__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-5);
+  overflow: hidden;
+  isolation: isolate;
+}
+/* Hinter dem Preis wandert ganz langsam ein schwacher Schimmer (Prototyp „Angebotsrechner“) */
+.answer__card::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  z-index: -1;
+  pointer-events: none;
+  background: var(--glow-drift);
+  filter: blur(var(--blur-drift));
+  animation: drift var(--duration-drift) ease-in-out infinite alternate;
+}
+@keyframes drift {
+  0% {
+    transform: var(--drift-a);
+  }
+  50% {
+    transform: var(--drift-b);
+  }
+  100% {
+    transform: var(--drift-c);
+  }
+}
+.answer__label {
+  font-family: var(--font-display);
+  font-size: var(--text-14);
+  line-height: var(--leading-14);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-title);
+  text-transform: uppercase;
+  color: var(--color-font-secondary);
+}
+.answer__value {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-1);
+  font-family: var(--font-display);
+  font-size: var(--text-48);
+  line-height: var(--leading-48);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-title);
+}
+/* Differenz-Schild neben dem Preis: schnell ein, eine Sekunde stehen, langsam aus (DifferenzSchild.tsx) */
+.differenz {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-full);
+  font-family: var(--font-text);
+  font-size: var(--text-14);
+  line-height: var(--leading-14);
+  font-weight: var(--weight-semibold);
+  letter-spacing: normal;
+  color: var(--color-text-white);
+  pointer-events: none;
+  animation:
+    differenz-ein var(--duration-differenz-ein) var(--ease-aus) both,
+    differenz-aus var(--duration-differenz-aus) var(--ease-standard) forwards;
+  animation-delay: var(--delay-sofort), calc(var(--duration-differenz-ein) + var(--delay-differenz-halten));
+}
+.differenz--minus {
+  background: var(--color-state-success-bg);
+}
+.differenz--plus {
+  background: var(--color-state-error-bg);
+}
+@keyframes differenz-ein {
+  from {
+    opacity: 0;
+    transform: translateY(var(--move-hinweis)) scale(var(--scale-menue));
+  }
+}
+@keyframes differenz-aus {
+  to {
+    opacity: 0;
+    transform: translateY(calc(-1 * var(--move-menue)));
+  }
+}
+.answer .answer__title {
+  margin-top: var(--space-1);
+  font-size: var(--text-16);
+  line-height: var(--leading-16);
+  font-weight: var(--weight-medium);
+}
+.answer__meta {
+  color: var(--color-text-secondary);
+}
+.answer__buy {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+.answer__chip {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  background: var(--color-white-8);
+  font-size: var(--text-14);
+  line-height: var(--leading-14);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-white);
+}
+.answer__buy-label {
+  font-size: var(--text-12);
+  line-height: var(--leading-12);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-secondary);
+}
+
+/* Credit-Stand: Herkunft der Zahl und Neuabruf (AC-F10-11) */
+.credit-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0 var(--space-3);
+  font-size: var(--text-12);
+  line-height: var(--leading-12);
+  color: var(--color-font-secondary);
+}
+.text-button {
+  flex: none;
+  min-height: var(--size-hit-min);
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-weight: var(--weight-medium);
+  color: var(--color-text-white);
+  text-decoration: underline;
+  text-underline-offset: var(--space-0-5);
+  cursor: pointer;
+}
+.text-button {
+  transition:
+    color var(--duration-hover-out) var(--ease-leave),
+    transform var(--duration-micro) var(--ease-aus);
+}
+.text-button:hover {
+  color: var(--color-lime);
+  transition:
+    color var(--duration-hover-in) var(--ease-out),
+    transform var(--duration-micro) var(--ease-aus);
+}
+.text-button:active {
+  transform: scale(var(--scale-druck));
+}
+.text-button:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-lime);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* Überschrift der Vergleichsliste und Pakettabelle (SPEC Entscheidungen 25 und 27) */
+.list-heading {
+  margin: 0;
+  font-size: var(--text-16);
+  line-height: var(--leading-16);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-white);
+}
+.buy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+.buy-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-14);
+  line-height: var(--leading-14);
+}
+.buy-table caption {
+  margin-bottom: var(--space-2);
+  text-align: left;
+  font-size: var(--text-12);
+  line-height: var(--leading-12);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-secondary);
+}
+.buy-table th,
+.buy-table td {
+  padding: var(--space-1-5) 0;
+  border-bottom: var(--border-width) solid var(--color-white-8);
+  text-align: right;
+  font-weight: var(--weight-regular);
+}
+.buy-table th:first-child,
+.buy-table td:first-child {
+  text-align: left;
+}
+.buy-table thead th {
+  font-size: var(--text-12);
+  line-height: var(--leading-12);
+  color: var(--color-text-secondary);
+}
+.buy-table tfoot th,
+.buy-table tfoot td {
+  border-bottom: 0;
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-white);
+}
+.buy-note,
+.buy-empty {
+  margin: 0;
+  font-size: var(--text-12);
+  line-height: var(--leading-12);
+  color: var(--color-text-secondary);
+}
+
+/* Gesamtkalkulation: Projekte zum Anhaken in einer Box, getrennt durch feine Linien (SPEC F15) */
+.check-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-radius: var(--radius-6);
+  background: var(--color-surface-primary);
+  overflow: hidden;
+}
+.check-list li + li {
+  border-top: var(--border-width) solid var(--color-white-8);
+}
+.check-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--size-control-md);
+  padding: var(--space-1-5) var(--space-3);
+  cursor: pointer;
+  transition: background-color var(--duration-hover-out) var(--ease-leave);
+}
+.check-row:hover {
+  background: var(--color-white-4);
+  transition: background-color var(--duration-hover-in) var(--ease-out);
+}
+.check-row input {
+  width: var(--size-icon-sm);
+  height: var(--size-icon-sm);
+  margin: 0;
+  accent-color: var(--color-lime);
+}
+.check-row input:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-lime);
+  outline-offset: var(--focus-ring-offset);
+}
+.check-row__name {
+  font-size: var(--text-14);
+  line-height: var(--leading-14);
+  font-weight: var(--weight-medium);
+}
+.check-row__hint {
+  font-size: var(--text-12);
+  line-height: var(--leading-12);
+  color: var(--color-text-secondary);
+}

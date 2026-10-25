@@ -1,0 +1,246 @@
+/* Higgsfield-Kostenkalkulator — Gestaltungswerte
+   Einzige Quelle aller Farben, Abstände, Radien, Schatten, Schriften und Bewegungszeiten.
+   Herkunft: Messung der Higgsfield-App am 09.10.2026 (Video-Arbeitsbereich, Modellauswahl, Kauf-Fenster)
+   (Schriften, Display-Stile). Namen der Farben wie auf higgsfield.ai. Nur Werte, keine Grafiken von Higgsfield.
+   Neue Werte erst hier ergänzen, dann verwenden.
+   Ausnahmen: src-tauri/tauri.conf.json (Fenstergröße, Hintergrundfarbe) und src-tauri/icons/app-icon.svg
+   dürfen Literale enthalten, weil sie keine CSS-Variablen lesen können; die Werte müssen denen hier entsprechen.
+   Neue Werte erst hier als Token ergänzen, dann verwenden. */
+
+/* ---------- Schriften ---------- */
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("../assets/fonts/SpaceGrotesk-Variable.woff2") format("woff2");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/Inter-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+
+  /* ---------- Farben: Flächen ---------- */
+  --color-surface: #0b0b0b; /* Fenstergrund */
+  --color-surface-tertiary: #0f1113; /* Eingabespalte, äußere Popover-Fläche */
+  --color-page-primary: #131517; /* innere Popover-Fläche, eingelassene Felder */
+  --color-surface-primary: #1c1e20; /* Felder, Einstellungszeilen, Karten */
+  --color-surface-secondary: #23262a; /* gefüllter Teil des Block-Reglers */
+  --color-surface-secondary-hover: #2a2d32;
+  --color-neutral-surface: #171717; /* Menü */
+  --color-neutral-surface-subtle: #222222; /* Menü-Rahmen */
+  --color-glass: #23262abf; /* Glas-Menü */
+  --color-picker: #1c1e20f2; /* Modellwähler, mit Weichzeichner */
+
+  /* ---------- Farben: Linien und Überlagerungen ---------- */
+  --color-separator-card: #d9d9d90a;
+  --color-badge-gray: #424242; /* Rahmen des Block-Reglers */
+  --color-white-4: #ffffff0a;
+  --color-white-5: #ffffff0d;
+  --color-white-8: #ffffff14;
+  --color-white-10: #ffffff1a;
+  --color-white-15: #ffffff26;
+  --color-white-50: #ffffff80;
+  --color-white-90: #ffffffe6;
+  --color-black-35: #00000059;
+
+  /* ---------- Farben: Text ---------- */
+  --color-text-primary: #f7f7f8;
+  --color-text-white: #ffffff;
+  --color-text-secondary: #ffffff99; /* Feldbeschriftung, inaktive Reiter */
+  --color-font-secondary: #898a8b; /* Beschreibungen, Meta-Chips */
+  --color-font-primary-reverted: #131517; /* Schrift auf Lime und Weiß */
+  --color-button-label-brand: #14151a;
+
+  /* ---------- Farben: Marke ---------- */
+  --color-lime: #d1fe17;
+  --color-lime-yellow: #effe17;
+  --color-lime-a5: #d1fe170d;
+  --color-lime-a20: #d1fe1733;
+  --color-lime-a48: #d1fe177a;
+  --color-pink: #ff005b;
+  --color-toggle-default: #5e636e;
+
+  /* ---------- Farben: Status (Schrift nur Weiß, Farbe nur als Fläche und Punkt) ---------- */
+  --color-state-error: #e72930;
+  --color-state-warning: #f3c977;
+  --color-state-success: #53c546;
+  --color-state-info: #5b91fe;
+  --color-state-error-bg: #e7293033;
+  --color-state-warning-bg: #ffbe4c33;
+  --color-state-success-bg: #00c31433;
+  --color-state-info-bg: #5b91fe33;
+
+  /* ---------- Verläufe ---------- */
+  --gradient-lime-button: radial-gradient(in oklab, #effe17 40%, #d1fe17 100%);
+  --gradient-highlight: linear-gradient(#56c20917 0%, #56c2094d 100%), linear-gradient(0deg, #0f1113 0%, #0f1113 100%);
+  --gradient-badge-blue: linear-gradient(90deg, #3259b4 0%, #3c8cff 50%, #00c8d2 75%, #78c9e6 100%);
+
+  /* ---------- Schatten ---------- */
+  --shadow-button-edge: inset 0 -3px 0 0 #0000006e; /* Lime-Button */
+  --shadow-button-edge-white: inset 0 -3px 0 0 #00000026; /* weißer Button */
+  --shadow-card-inset: inset 0 4px 12px 0 #ffffff0a; /* Karten */
+  --shadow-highlight: inset 0 0 16px 0 #d1fe177a; /* hervorgehobene Karte */
+  --shadow-icon-tile: inset 0 2px 3px 0 #ffffff08;
+  --shadow-menu: 0 20px 25px -5px #0000004d, 0 8px 10px -6px #0000004d;
+  --shadow-glass-menu: 0 4px 20px 0 #00000033;
+  --shadow-thumb: 0 1px 3px 0 #0000001a, 0 1px 2px -1px #0000001a;
+  --shadow-segment: 0 1px 3px 0 #0000002e;
+  --blur-glass: 16px;
+  --blur-picker: 32px;
+
+  /* ---------- Abstände (4er-Raster) ---------- */
+  --space-0-5: 2px;
+  --space-1: 4px;
+  --space-1-5: 6px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+
+  /* ---------- Größen ---------- */
+  --size-control-sm: 32px; /* Menüeintrag, Plus-Minus-Knopf, Chip */
+  --size-control-md: 40px; /* Kachel */
+  --size-control-lg: 48px; /* Einstellungszeile, Button */
+  --size-control-xl: 56px; /* zweizeiliges Segment */
+  --size-icon-sm: 16px;
+  --size-icon-md: 20px;
+  --size-icon-tile: 40px;
+  --size-switch-w: 36px;
+  --size-switch-h: 24px;
+  --size-switch-thumb: 16px;
+  --size-slider-thumb-w: 4px;
+  --size-slider-track: 36px; /* Höhe des Block-Reglers */
+  --size-picker-row: 52px; /* Zeile im Modellwähler (Icon-Kachel + zwei Zeilen Text) */
+  --size-hit-min: 24px; /* kleinste Klickfläche, auch für Info-Icons */
+  --size-status-dot: 8px; /* Punkt im Hinweis */
+  --border-width: 1px; /* alle Rahmen und der innere Fehler-Rahmen */
+  --width-input-column: 340px;
+  --width-price-tile: 92px; /* Preiskachel in Ergebniskarte und Optionszeile (Pass-Karten der Higgsfield-App) */
+  --width-dialog: 420px; /* Bestätigungsdialog */
+
+  /* ---------- Radien ---------- */
+  --radius-4: 4px;
+  --radius-6: 6px;
+  --radius-8: 8px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-full: 9999px;
+
+  /* ---------- Schrift ---------- */
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-text: "Inter", system-ui, -apple-system, sans-serif;
+  --text-10: 10px;
+  --leading-10: 14px;
+  --text-12: 12px;
+  --leading-12: 16px;
+  --leading-12-loose: 18px;
+  --text-14: 14px;
+  --leading-14: 20px;
+  --text-16: 16px;
+  --leading-16: 24px;
+  --text-20: 20px;
+  --leading-20: 24px;
+  --text-24: 24px;
+  --leading-24: 30px;
+  --text-28: 28px;
+  --leading-28: 36px;
+  --text-48: 48px;
+  --leading-48: 56px;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --tracking-display: -0.04em;
+  --tracking-title: -0.02em;
+  --skew-badge: -12deg;
+
+  /* ---------- Fokus und Zustände ---------- */
+  --focus-ring-width: 2px; /* Fokusring in --color-lime, nur bei Tastaturfokus (:focus-visible) */
+  --focus-ring-offset: 2px;
+  --opacity-disabled: 0.5;
+
+  /* ---------- Bewegung (Werte nach docs/UI-RULES.md §11) ---------- */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1); /* Higgsfield-Kurve, für Zustände, Reveals und Kontextwechsel */
+  --ease-out: ease-out;
+  --ease-leave: ease;
+  --duration-hover-in: 180ms;
+  --duration-hover-out: 450ms;
+  --duration-cta-hover: 150ms;
+  --duration-micro: 200ms;
+  --duration-state: 300ms;
+  --duration-reveal: 250ms;
+  --duration-context: 350ms;
+  --scale-cta-hover: 1.03;
+  --scale-cta-press: 0.97;
+
+  /* ---------- Bewegung nach dem Prototyp „Angebotsrechner“ (KI-Film-Angebotsrechner, 261023, docs/UI-RULES.md §11) ---------- */
+  --ease-aus: cubic-bezier(0.16, 1, 0.3, 1); /* weiches Auslaufen: Werte gleiten, Inhalte erscheinen */
+  --ease-feder: cubic-bezier(0.34, 1.32, 0.5, 1); /* federt leicht über: Markierung, Schalterknopf, Pfeile */
+  --ease-flaeche: cubic-bezier(0.22, 1, 0.36, 1); /* Flächen ziehen sich auf */
+  --duration-flaeche: 800ms; /* breite Fläche zieht sich von links auf */
+  --duration-flaeche-hoch: 950ms; /* hohe Fläche zieht sich von oben auf */
+  --duration-atom: 650ms; /* ein Element gleitet herein */
+  --duration-atom-fein: 450ms; /* feine Teile wie Skalenwerte */
+  --duration-wisch: 900ms; /* Balken und Regler decken sich von links auf */
+  --duration-zaehlen: 700ms; /* Zahl zählt vom alten zum neuen Wert */
+  --duration-zaehlen-aufbau: 900ms; /* Zahl zählt beim Aufbau von 0 hoch */
+  --duration-gleiten: 500ms; /* Markierung und Schalterknopf gleiten federnd */
+  --duration-feder: 450ms; /* Pfeile, Icons, Griffe */
+  --duration-akkordeon: 500ms; /* Akkordeon und eingeschaltete Box klappen auf */
+  --duration-hinweis: 450ms; /* Hinweis erscheint */
+  --duration-puls: 550ms; /* geänderter Wert pulsiert einmal */
+  --duration-hover-lift: 600ms; /* Zeile hebt sich beim Darüberfahren */
+  --duration-drift: 24s; /* Schimmer hinter der Antwort wandert ganz langsam */
+  --duration-differenz-ein: 180ms; /* Differenz-Schild am Preis blendet schnell ein … */
+  --delay-differenz-halten: 1000ms; /* … steht eine Sekunde … */
+  --duration-differenz-aus: 1400ms; /* … und blendet langsam aus */
+  --scroll-nachlauf: 0.075; /* Nachlauf beim Scrollen: Anteil des Restwegs je 60stel Sekunde (Prototyp „Angebotsrechner“) */
+  --scroll-zeile: 40px; /* so weit scrollt ein Mausrad-Schritt, der in Zeilen statt Pixeln gemeldet wird */
+  --delay-sofort: 0ms; /* ohne Verzögerung, für Listen von Verzögerungen */
+  --delay-flaeche: 190ms; /* Treppe: jede Fläche startet so viel nach der vorigen */
+  --delay-inhalt: 320ms; /* Inhalte starten so viel nach ihrer Fläche */
+  --delay-verschachtelt: 150ms; /* Flächen in einer Fläche starten so weit versetzt */
+  --delay-zahl: 120ms; /* Zahl beginnt so viel nach ihrem Element zu zählen */
+  --stagger-atom: 60ms; /* Abstand zwischen zwei Elementen beim Aufbau */
+  --stagger-fein: 10ms; /* Abstand zwischen feinen Teilen */
+  --stagger-auf-min: 22ms; /* Abstand beim Aufklappen, lange Listen laufen dichter … */
+  --stagger-auf-max: 55ms; /* … kurze lockerer */
+  --stagger-auf-gesamt: 900ms; /* nach spätestens dieser Zeit steht das letzte Element */
+  --move-atom: 10px; /* so weit gleitet ein Element von unten herein */
+  --move-hinweis: 6px;
+  --move-menue: 4px;
+  --lift-hover: -2px; /* so weit hebt sich eine Zeile beim Darüberfahren */
+  --blur-atom: 4px; /* Unschärfe, aus der ein Element scharf wird */
+  --scale-druck: 0.96; /* Bedienelement beim Drücken */
+  --scale-puls: 1.08;
+  --scale-icon-gewaehlt: 1.12;
+  --scale-menue: 0.98;
+  --scale-griff-hover: 1.5; /* Reglergriff wird breiter */
+  --scale-griff-druck: 2;
+  --stretch-schalter: 6px; /* Schalterknopf zieht sich beim Drücken in die Breite */
+  --shadow-lift: 0 14px 32px #00000059;
+  --glow-drift:
+    radial-gradient(30% 40% at 20% 30%, #d1fe170f, transparent 70%),
+    radial-gradient(28% 36% at 80% 20%, #ffffff0a, transparent 70%),
+    radial-gradient(35% 34% at 60% 85%, #56c20914, transparent 70%);
+  --blur-drift: 30px;
+  --drift-a: translate3d(-4%, -2%, 0) rotate(0deg) scale(1);
+  --drift-b: translate3d(3%, 2%, 0) rotate(8deg) scale(1.06);
+  --drift-c: translate3d(-2%, 4%, 0) rotate(-6deg) scale(1.02);
+
+  /* ---------- Ebenen ---------- */
+  --z-tooltip: 10;
+  --z-dropdown: 20;
+  --z-modal: 30;
+  --z-toast: 40;
+}

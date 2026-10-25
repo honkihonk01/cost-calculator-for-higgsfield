@@ -1,0 +1,84 @@
+/* Grundstil der App. Alle Werte kommen aus tokens.css. */
+@import "./tokens.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  font-family: var(--font-text);
+  font-size: var(--text-14);
+  line-height: var(--leading-14);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+/* Platzhalter mit ausreichendem Kontrast statt der Browserfarbe (WCAG AA 4,5 : 1) */
+::placeholder {
+  color: var(--color-font-secondary);
+  opacity: 1;
+}
+
+:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-lime);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* Reduzierte Bewegung muss jede Komponenten-Regel schlagen, deshalb !important. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    /* biome-ignore lint/complexity/noImportantStyles: Abschaltpfad für Bewegung muss Vorrang haben */
+    transition: none !important;
+    /* biome-ignore lint/complexity/noImportantStyles: Abschaltpfad für Bewegung muss Vorrang haben */
+    animation: none !important;
+  }
+}
+
+/* ---------- Fensteraufbau (docs/UI-RULES.md, Abschnitt A) ---------- */
+
+/* Oberste Zone: Platz für die Ampel-Knöpfe der Overlay-Titelleiste, zum Verschieben des Fensters */
+.titlebar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: var(--space-10);
+}
+
+.app {
+  display: flex;
+  gap: var(--space-4);
+  height: 100%;
+  padding: var(--space-10) var(--space-4) var(--space-4);
+}
+
+.input-column {
+  flex: 0 0 var(--width-input-column);
+  padding: var(--space-4);
+  background: var(--color-surface-tertiary);
+  border: var(--border-width) solid var(--color-separator-card);
+  border-radius: var(--radius-16);
+  overflow-y: auto;
+}
+
+.result-area {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-y: auto;
+}
+
+.placeholder {
+  margin: 0;
+  color: var(--color-font-secondary);
+}

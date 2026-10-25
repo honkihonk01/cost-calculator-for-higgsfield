@@ -1,0 +1,101 @@
+{
+  "imagesPerClip": 2,
+  "models": [
+    {
+      "id": "seedream-5.0-flash",
+      "name": "Seedream 5.0 Flash",
+      "pricePerImage": {
+        "status": "known",
+        "value": 0.5,
+        "unit": "credits_per_image",
+        "asOf": "2026-10-09",
+        "source": "Higgsfield-App, Bildgenerierung (docs/RECHENREGELN.md 3.3)"
+      },
+      "storyboard": true
+    },
+    {
+      "id": "seedream-5.0-pro",
+      "name": "Seedream 5.0 Pro",
+      "pricePerImage": {
+        "status": "known",
+        "value": 3,
+        "unit": "credits_per_image",
+        "asOf": "2026-10-09",
+        "source": "Widersprüchliche Angaben von 1,25 bis 3 Credits; festgelegt auf den höchsten Wert (docs/RECHENREGELN.md 3.3)"
+      },
+      "storyboard": true
+    },
+    {
+      "id": "gpt-image-2.5-sunburst-high-1k",
+      "name": "GPT Image 2.5 Sunburst (high, 1k)",
+      "pricePerImage": {
+        "status": "known",
+        "value": 1.5,
+        "unit": "credits_per_image",
+        "asOf": "2026-10-09",
+        "source": "Higgsfield-App, Qualität high (docs/RECHENREGELN.md 3.3)"
+      },
+      "storyboard": false
+    },
+    {
+      "id": "gpt-image-2.5-sunburst-high-2k",
+      "name": "GPT Image 2.5 Sunburst (high, 2k)",
+      "pricePerImage": {
+        "status": "known",
+        "value": 2.75,
+        "unit": "credits_per_image",
+        "asOf": "2026-10-09",
+        "source": "Higgsfield-App, Qualität high (docs/RECHENREGELN.md 3.3)"
+      },
+      "storyboard": false
+    },
+    {
+      "id": "gpt-image-2.5-sunburst-high-4k",
+      "name": "GPT Image 2.5 Sunburst (high, 4k)",
+      "pricePerImage": {
+        "status": "known",
+        "value": 4.25,
+        "unit": "credits_per_image",
+        "asOf": "2026-10-09",
+        "source": "Higgsfield-App, Qualität high (docs/RECHENREGELN.md 3.3)"
+      },
+      "storyboard": false
+    },
+    {
+      "id": "gpt-image-2.5-flare-high-1k",
+      "name": "GPT Image 2.5 Flare (high, 1k)",
+      "pricePerImage": {
+        "status": "known",
+        "value": 1.5,
+        "unit": "credits_per_image",
+        "asOf": "2026-10-09",
+        "source": "Higgsfield-App, Qualität high (docs/RECHENREGELN.md 3.3)"
+      },
+      "storyboard": false
+    },
+    {
+      "id": "gpt-image-2.5-flare-high-2k",
+      "name": "GPT Image 2.5 Flare (high, 2k)",
+      "pricePerImage": {
+        "status": "known",
+        "value": 2.75,
+        "unit": "credits_per_image",
+        "asOf": "2026-10-09",
+        "source": "Higgsfield-App, Qualität high (docs/RECHENREGELN.md 3.3)"
+      },
+      "storyboard": false
+    },
+    {
+      "id": "gpt-image-2.5-flare-high-4k",
+      "name": "GPT Image 2.5 Flare (high, 4k)",
+      "pricePerImage": {
+        "status": "known",
+        "value": 4.25,
+        "unit": "credits_per_image",
+        "asOf": "2026-10-09",
+        "source": "Higgsfield-App, Qualität high (docs/RECHENREGELN.md 3.3)"
+      },
+      "storyboard": false
+    }
+  ]
+}

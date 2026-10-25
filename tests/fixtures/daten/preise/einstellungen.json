@@ -1,0 +1,33 @@
+{
+  "clipLengthSeconds": 7.5,
+  "discountPercent": 25,
+  "discountEnabled": false,
+  "discountScope": {
+    "modelIds": [
+      "seedance-2.5",
+      "seedance-2.5-draft"
+    ],
+    "resolutions": [
+      "1080p"
+    ]
+  },
+  "packagePriceLevel": "regular",
+  "audioSurchargePercent": 0,
+  "ecbTimeoutMs": 5000,
+  "clipImagesPerClip": 3.5,
+  "attemptsPerAsset": 8,
+  "assetsPerPerson": 3,
+  "assetsPerLocation": 9,
+  "assetPeople": 5,
+  "assetLocations": 3,
+  "startValues": {
+    "durationSeconds": 600,
+    "modelId": "seedance-2.5",
+    "resolution": "480p",
+    "attemptsPerClip": 3,
+    "clipImageModelId": "seedream-5.0-pro",
+    "storyboardModelId": "seedream-5.0-flash",
+    "assetModelId": "seedream-5.0-pro",
+    "creditBalance": 0
+  }
+}

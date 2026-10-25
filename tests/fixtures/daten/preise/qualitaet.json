@@ -1,0 +1,17 @@
+{
+  "resolutionPoints": {
+    "480p": 1,
+    "720p": 2,
+    "1080p": 3,
+    "4K": 4
+  },
+  "modelFactors": {
+    "seedance-2.5": 1,
+    "seedance-2.5-draft": 1,
+    "seedance-2.0-standard": 0.8,
+    "seedance-2.0-enhanced-fast": 0.7,
+    "seedance-2.0-mini": 0.6
+  },
+  "asOf": "2026-10-25",
+  "source": "Vom Autor am 25.10.2026 freigegebene Einschätzung: Seedance 2.5 mit Referenz-Workflow = 1,0; Seedance 2.0 darunter (docs/DECISIONS.md)"
+}

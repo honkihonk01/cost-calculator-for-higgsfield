@@ -1,0 +1,206 @@
+/* Bausteine des Ergebnisbereichs (docs/UI-RULES.md B12–B18). Nur Token aus src/styles/tokens.css. */
+
+/* ---------- Karten (B12, B14) ---------- */
+.card {
+  position: relative;
+  background: var(--color-surface-primary);
+  border-radius: var(--radius-16);
+  box-shadow: var(--shadow-card-inset);
+}
+.card[data-highlight="true"] {
+  background: var(--gradient-highlight);
+  box-shadow: var(--shadow-highlight);
+  outline: var(--border-width) solid var(--color-lime-a48);
+  outline-offset: calc(-1 * var(--border-width));
+}
+
+/* ---------- Kennzeichnungen ---------- */
+.pill-lime,
+.chip-info {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+.pill-lime {
+  background: var(--color-lime);
+  color: var(--color-font-primary-reverted);
+  font-size: var(--text-10);
+  line-height: var(--leading-10);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+}
+.chip-info {
+  background: var(--color-white-5);
+  color: var(--color-text-primary);
+  font-size: var(--text-12);
+  line-height: var(--leading-12);
+  font-weight: var(--weight-medium);
+}
+
+/* ---------- Preiskachel ---------- */
+
+/* ---------- B13 Optionszeile ---------- */
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.option__title {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  font-size: var(--text-16);
+  line-height: var(--leading-16);
+  font-weight: var(--weight-semibold);
+}
+.option__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-top: var(--space-1);
+}
+
+/* ---------- Wertzeilen im Reiter „Details“ ---------- */
+.values {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+.value-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: var(--size-control-md);
+}
+.value-row dt {
+  color: var(--color-font-secondary);
+}
+.value-row dd {
+  margin: 0;
+  text-align: right;
+  color: var(--color-text-primary);
+}
+
+/* ---------- Ergebnis-Reiter (B4 auf Radix Tabs); beim Wechsel erscheint der Inhalt gestaffelt (src/ui/bewegung) ---------- */
+.result-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.result-tabs__panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.result-tabs__panel:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-lime);
+  outline-offset: var(--focus-ring-offset);
+  border-radius: var(--radius-8);
+}
+
+/* ---------- B16 Buttons ---------- */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: var(--size-control-lg);
+  padding: 0 var(--space-4);
+  border: 0;
+  border-radius: var(--radius-12);
+  font-family: var(--font-text);
+  font-size: var(--text-16);
+  line-height: var(--leading-16);
+  font-weight: var(--weight-semibold);
+  cursor: pointer;
+  transition:
+    transform var(--duration-hover-out) var(--ease-leave),
+    background-color var(--duration-micro) var(--ease-standard);
+}
+.button:hover:not(:disabled) {
+  transform: scale(var(--scale-cta-hover));
+  transition: transform var(--duration-cta-hover) var(--ease-out);
+}
+.button:active:not(:disabled) {
+  transform: scale(var(--scale-cta-press));
+}
+.button:disabled {
+  opacity: var(--opacity-disabled);
+  cursor: default;
+}
+.button--primary {
+  width: 100%;
+  background: var(--color-lime) var(--gradient-lime-button);
+  color: var(--color-button-label-brand);
+  box-shadow: var(--shadow-button-edge);
+}
+.button--white {
+  background: var(--color-text-white);
+  color: var(--color-font-primary-reverted);
+  box-shadow: var(--shadow-button-edge-white);
+}
+.button--outline {
+  background: transparent;
+  color: var(--color-text-white);
+  box-shadow: inset 0 0 0 var(--border-width) var(--color-white-10);
+}
+
+/* ---------- B17 Bestätigungsdialog ---------- */
+.dialog {
+  width: var(--width-dialog);
+  max-width: calc(100% - 2 * var(--space-4));
+  padding: var(--space-2);
+  background: var(--color-surface-tertiary);
+  border: var(--border-width) solid var(--color-separator-card);
+  border-radius: var(--radius-16);
+  color: var(--color-text-primary);
+}
+.dialog::backdrop {
+  background: var(--color-black-35);
+}
+/* Der Dialog gleitet weich herein, der Hintergrund blendet ab */
+.dialog[open] {
+  animation: dialog-auf var(--duration-atom) var(--ease-aus);
+}
+.dialog[open]::backdrop {
+  animation: blende var(--duration-state) var(--ease-standard);
+}
+@keyframes dialog-auf {
+  from {
+    opacity: 0;
+    transform: translateY(var(--move-atom)) scale(var(--scale-menue));
+    filter: blur(var(--blur-atom));
+  }
+}
+.dialog__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  background: var(--color-page-primary);
+  border-radius: var(--radius-12);
+}
+.dialog__inner p {
+  margin: 0;
+}
+.dialog__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-20);
+  line-height: var(--leading-20);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-title);
+  text-transform: uppercase;
+}
+.dialog__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+}

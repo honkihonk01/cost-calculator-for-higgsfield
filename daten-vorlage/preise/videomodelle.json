@@ -1,0 +1,182 @@
+{
+  "models": [
+    {
+      "id": "seedance-2.5",
+      "name": "Seedance 2.5",
+      "family": "seedance-2.5",
+      "clipMinSeconds": 4,
+      "clipMaxSeconds": 30,
+      "resolutions": {
+        "480p": {
+          "status": "known",
+          "value": 3,
+          "unit": "credits_per_second",
+          "asOf": "2026-10-09",
+          "source": "Higgsfield-App, Preisangabe Seedance 2.5, abgelesen vom Autor (docs/RECHENREGELN.md 3.1)"
+        },
+        "720p": {
+          "status": "known",
+          "value": 7,
+          "unit": "credits_per_second",
+          "asOf": "2026-10-09",
+          "source": "Higgsfield-App, Preisangabe Seedance 2.5, abgelesen vom Autor (docs/RECHENREGELN.md 3.1)"
+        },
+        "1080p": {
+          "status": "known",
+          "value": 16,
+          "unit": "credits_per_second",
+          "asOf": "2026-10-09",
+          "source": "Higgsfield-App, Preisangabe Seedance 2.5, abgelesen vom Autor (docs/RECHENREGELN.md 3.1)"
+        },
+        "4K": {
+          "status": "unavailable",
+          "asOf": "2026-10-09",
+          "source": "Seedance 2.5 bietet kein 4K an (docs/RECHENREGELN.md 3.1)"
+        }
+      },
+      "draft": null,
+      "audioSurchargeAllowed": false,
+      "badge": "top"
+    },
+    {
+      "id": "seedance-2.5-draft",
+      "name": "Seedance 2.5 Draft",
+      "family": "seedance-2.5",
+      "clipMinSeconds": 4,
+      "clipMaxSeconds": 30,
+      "resolutions": {
+        "480p": {
+          "status": "known",
+          "value": 3,
+          "unit": "credits_per_second",
+          "asOf": "2026-10-09",
+          "source": "Higgsfield-App, Preisangabe Seedance 2.5, abgelesen vom Autor (docs/RECHENREGELN.md 3.1)"
+        },
+        "720p": {
+          "status": "unavailable",
+          "asOf": "2026-10-09",
+          "source": "Der Draft erzeugt immer 480p; 1080p entsteht über die Fertigstellung mit Seedance 2.5 (docs/RECHENREGELN.md 3.1)"
+        },
+        "1080p": {
+          "status": "unavailable",
+          "asOf": "2026-10-09",
+          "source": "Der Draft erzeugt immer 480p; 1080p entsteht über die Fertigstellung mit Seedance 2.5 (docs/RECHENREGELN.md 3.1)"
+        },
+        "4K": {
+          "status": "unavailable",
+          "asOf": "2026-10-09",
+          "source": "Der Draft erzeugt immer 480p; 1080p entsteht über die Fertigstellung mit Seedance 2.5 (docs/RECHENREGELN.md 3.1)"
+        }
+      },
+      "draft": {
+        "finishModelId": "seedance-2.5",
+        "finishResolution": "1080p",
+        "finishWithinDays": 7
+      },
+      "audioSurchargeAllowed": false,
+      "badge": "new"
+    },
+    {
+      "id": "seedance-2.0-standard",
+      "name": "Seedance 2.0 Standard",
+      "family": "seedance-2.0",
+      "clipMinSeconds": 4,
+      "clipMaxSeconds": 15,
+      "resolutions": {
+        "480p": {
+          "status": "unknown",
+          "asOf": "2026-10-09",
+          "source": "Higgsfield veröffentlicht keinen festen Wert; die Zahl erscheint erst am Generate-Button (docs/RECHENREGELN.md 3.2)"
+        },
+        "720p": {
+          "status": "known",
+          "value": 4.5,
+          "unit": "credits_per_second",
+          "asOf": "2026-10-09",
+          "source": "higgsfield.ai/blog/seedance-2-0-pricing-2026 (docs/RECHENREGELN.md 3.2)"
+        },
+        "1080p": {
+          "status": "known",
+          "value": 9,
+          "unit": "credits_per_second",
+          "asOf": "2026-10-09",
+          "source": "higgsfield.ai/blog/ai-video-credits-explained (docs/RECHENREGELN.md 3.2)"
+        },
+        "4K": {
+          "status": "unknown",
+          "asOf": "2026-10-09",
+          "source": "Higgsfield veröffentlicht keinen festen Wert; die Zahl erscheint erst am Generate-Button (docs/RECHENREGELN.md 3.2)"
+        }
+      },
+      "draft": null,
+      "audioSurchargeAllowed": true,
+      "badge": null
+    },
+    {
+      "id": "seedance-2.0-enhanced-fast",
+      "name": "Seedance 2.0 Enhanced Fast",
+      "family": "seedance-2.0",
+      "clipMinSeconds": 4,
+      "clipMaxSeconds": 15,
+      "resolutions": {
+        "480p": {
+          "status": "unknown",
+          "asOf": "2026-10-09",
+          "source": "Higgsfield veröffentlicht keinen festen Wert; die Zahl erscheint erst am Generate-Button (docs/RECHENREGELN.md 3.2)"
+        },
+        "720p": {
+          "status": "known",
+          "value": 3.5,
+          "unit": "credits_per_second",
+          "asOf": "2026-10-09",
+          "source": "higgsfield.ai/blog/seedance-2-0-pricing-2026 (docs/RECHENREGELN.md 3.2)"
+        },
+        "1080p": {
+          "status": "unavailable",
+          "asOf": "2026-10-09",
+          "source": "Enhanced Fast gibt es nur in 480p und 720p (docs/RECHENREGELN.md 3.2)"
+        },
+        "4K": {
+          "status": "unavailable",
+          "asOf": "2026-10-09",
+          "source": "Enhanced Fast gibt es nur in 480p und 720p (docs/RECHENREGELN.md 3.2)"
+        }
+      },
+      "draft": null,
+      "audioSurchargeAllowed": true,
+      "badge": null
+    },
+    {
+      "id": "seedance-2.0-mini",
+      "name": "Seedance 2.0 Mini",
+      "family": "seedance-2.0",
+      "clipMinSeconds": 4,
+      "clipMaxSeconds": 15,
+      "resolutions": {
+        "480p": {
+          "status": "unknown",
+          "asOf": "2026-10-09",
+          "source": "Higgsfield veröffentlicht keinen festen Wert; die Zahl erscheint erst am Generate-Button (docs/RECHENREGELN.md 3.2)"
+        },
+        "720p": {
+          "status": "unknown",
+          "asOf": "2026-10-09",
+          "source": "Higgsfield veröffentlicht keinen festen Wert; die Zahl erscheint erst am Generate-Button (docs/RECHENREGELN.md 3.2)"
+        },
+        "1080p": {
+          "status": "unavailable",
+          "asOf": "2026-10-09",
+          "source": "Mini gibt es nur in 480p und 720p (docs/RECHENREGELN.md 3.2), vom Autor bestätigt am 09.10.2026"
+        },
+        "4K": {
+          "status": "unavailable",
+          "asOf": "2026-10-09",
+          "source": "Mini gibt es nur in 480p und 720p (docs/RECHENREGELN.md 3.2), vom Autor bestätigt am 09.10.2026"
+        }
+      },
+      "draft": null,
+      "audioSurchargeAllowed": true,
+      "badge": null
+    }
+  ]
+}

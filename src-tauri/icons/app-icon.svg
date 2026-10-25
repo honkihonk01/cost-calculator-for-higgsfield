@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!-- Fläche nach dem macOS-Raster: 824 × 824 mit 100 px Rand und Eckenradius 185,4; Farbe = Token color-surface -->
+  <rect x="100" y="100" width="824" height="824" rx="185.4" ry="185.4" fill="#0b0b0b"/>
+  <!-- Eigenes Zeichen: eine Münze (Kosten) mit Wiedergabe-Dreieck (Film); Farbe = Token color-lime -->
+  <circle cx="512" cy="512" r="247" fill="#d1fe17"/>
+  <circle cx="512" cy="512" r="205" fill="none" stroke="#0b0b0b" stroke-width="16"/>
+  <path d="M462 412 L622 512 L462 612 Z" fill="#0b0b0b" stroke="#0b0b0b" stroke-width="24" stroke-linejoin="round"/>
+</svg>
