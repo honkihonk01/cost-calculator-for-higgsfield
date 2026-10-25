@@ -16,7 +16,7 @@ The app, its documentation and its code comments are in **German** (the author's
 
 ## What it does
 
-![Changing the attempts per clip: the price counts to its new value and a badge shows the difference](docs/bilder/preis-animation.gif)
+![The window building itself up on launch: panels unfold, elements slide in one after another and the numbers count up](docs/bilder/aufbau-animation.gif)
 
 - **One number for your choice.** Enter what is still open in your film (duration or number of clips), the video model, resolution, attempts per clip, the image model for stills and references, and your current credit balance. The app shows the gross cost in euros, the credits you need and exactly which credit packages to buy.
 - **Every production path compared.** All models and resolutions, ranked by cost per quality point, with the difference to your choice. Expand a row to see why it is recommended and what you would have to buy.
