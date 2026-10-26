@@ -22,7 +22,7 @@ The app, its documentation and its code comments are in **German** (the author's
 - **Every production path compared.** All models and resolutions, ranked by cost per quality point, with the difference to your choice. Expand a row to see why it is recommended and what you would have to buy.
 
   ![An expanded production path with its reasoning, credit needs and packages to buy](docs/bilder/vergleichsliste.png)
-- **Multiple projects.** Save films as projects and add several of them up, counting your credit balance only once.
+- **Multiple projects.** Save films as projects, update, rename or delete them (deleted projects go to a trash folder, nothing is ever erased), and add several of them up, counting your credit balance only once.
 - **Three ways to use one calculation core:**
   - the **Mac app** (Tauri),
   - a **command line tool** `hfcalc`,

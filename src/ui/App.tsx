@@ -1,20 +1,21 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { calculateTotal } from "../kern/index.ts";
-import { readProjectWith, saveProjectWith } from "../laden/gemeinsam/index.ts";
-import { describeError, type ExchangeRate, newestPriceDate } from "../schema/index.ts";
+import { describeError, type ExchangeRate } from "../schema/index.ts";
 import { aufbauen, bewegt, nachlaufen, staffeln } from "./bewegung/index.ts";
-import { effectiveRate, evaluate, FIELD_LABELS, inputsForSaving } from "./bewertung.ts";
+import { effectiveRate, evaluate, FIELD_LABELS } from "./bewertung.ts";
 import { ErrorBoundary, Note, PillRadio } from "./components/index.ts";
 import { useLiveCredits } from "./creditstand.ts";
-import { type FieldName, type FormState, initialForm, inputsToForm, toNumber } from "./formular.ts";
+import { type FieldName, type FormState, initialForm, toNumber } from "./formular.ts";
 import { useTotal } from "./gesamt.ts";
+import { useProjects } from "./projektverwaltung.ts";
 import type { DataSource, PricesResult } from "./quelle.ts";
 import "./views/ansichten.css";
 import { Eingabespalte } from "./views/Eingabespalte.tsx";
 import { Ergebnisbereich, RESULT_TABS, type ResultView } from "./views/Ergebnisbereich.tsx";
 import { GesamtErgebnis, type TotalView } from "./views/GesamtErgebnis.tsx";
 import { GesamtSpalte } from "./views/GesamtSpalte.tsx";
-import { ProjectMenu, type SaveOutcome, SaveProject } from "./views/Projekte.tsx";
+import { ProjektAktionen } from "./views/ProjektAktionen.tsx";
+import { ProjectMenu, SaveProject } from "./views/Projekte.tsx";
 
 type Mode = "single" | "total";
 const MODES: { value: Mode; label: string }[] = [
@@ -31,9 +32,6 @@ export function App({ source }: { source: DataSource }) {
   const [rate, setRate] = useState<ExchangeRate | null>(null);
   const [rateLoading, setRateLoading] = useState(true);
   const [tab, setTab] = useState<string>(RESULT_TABS[0].value);
-  const [project, setProject] = useState<string | null>(null);
-  const [projectMessage, setProjectMessage] = useState<{ kind: "error" | "info"; text: string } | null>(null);
-  const [saveOpen, setSaveOpen] = useState(false);
   // Einzelprojekt oder Gesamtkalkulation mehrerer gespeicherter Projekte (SPEC F15)
   const [mode, setMode] = useState<Mode>("single");
   const modeRef = useRef(mode);
@@ -115,6 +113,9 @@ export function App({ source }: { source: DataSource }) {
     [prices, form, rate, today],
   );
   const canSave = Boolean(evaluation?.result);
+  const projects = useProjects({ source, prices, form, result: evaluation?.result ?? null, setForm, setTouched });
+  const projectsRef = useRef(projects);
+  projectsRef.current = projects;
   const totalView = useMemo((): TotalView | null => {
     if (mode !== "total" || !prices?.ok || !form) return null;
     if (total.selectedProjects.length === 0) return { state: "empty" };
@@ -125,13 +126,17 @@ export function App({ source }: { source: DataSource }) {
       : { state: "invalid", errors: outcome.errors };
   }, [mode, prices, form, rate, today, total.selectedProjects, total.state.balanceText, rateLoading]);
 
-  // UI-RULES §13: Cmd+S speichert, Cmd+1 bis Cmd+3 wechseln die Ergebnis-Reiter.
+  // UI-RULES §13: Cmd+S speichert (ein geladenes Projekt direkt), Cmd+1 bis Cmd+3 wechseln die Ergebnis-Reiter.
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       if (!event.metaKey) return;
       if (event.key === "s") {
         event.preventDefault();
-        if (canSave && modeRef.current === "single") setSaveOpen(true);
+        const current = projectsRef.current;
+        if (canSave && modeRef.current === "single") {
+          if (current.project) void current.saveChanges();
+          else current.setSaveOpen(true);
+        }
       }
       const index = ["1", "2", "3"].indexOf(event.key);
       const target = RESULT_TABS[index];
@@ -143,39 +148,6 @@ export function App({ source }: { source: DataSource }) {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [canSave]);
-
-  const loadProject = async (name: string) => {
-    if (!prices?.ok) return;
-    const loaded = await readProjectWith(source.projects, name, "Das Projektmenü zeigt alle Projekte.");
-    if (!loaded.ok) {
-      setProjectMessage({ kind: "error", text: loaded.errors.map(describeError).join(" ") });
-      return;
-    }
-    const { form: next, notice } = inputsToForm(loaded.value.inputs, prices.data.settings);
-    setForm(next);
-    // Alle Felder gelten als berührt, damit ein Projekt, das nicht mehr zu den Preisdaten passt, sofort auffällt.
-    setTouched(new Set(Object.keys(FIELD_LABELS) as FieldName[]));
-    setProject(loaded.value.name);
-    setProjectMessage(notice ? { kind: "info", text: notice } : null);
-  };
-
-  const saveProject = async (name: string, overwrite: boolean): Promise<SaveOutcome> => {
-    const inputs = prices?.ok && form ? inputsForSaving(form, prices.data) : null;
-    if (!prices?.ok || !inputs || !evaluation?.result) {
-      return { ok: false, exists: false, message: "Erst wenn alle Felder gültig sind, lässt sich speichern." };
-    }
-    const saved = await saveProjectWith(
-      source.projects,
-      { name, inputs, result: evaluation.result, pricesAsOf: newestPriceDate(prices.data) },
-      { overwrite, now: source.now() },
-    );
-    if (saved.ok) {
-      setProject(saved.value.name);
-      return { ok: true };
-    }
-    const exists = saved.errors.some((error) => error.code === "project-exists");
-    return { ok: false, exists, message: saved.errors.map((error) => error.message).join(" ") };
-  };
 
   const visibleErrors: Partial<Record<FieldName, string>> = {};
   for (const [field, message] of Object.entries(evaluation?.inputErrors ?? {}) as [FieldName, string][]) {
@@ -197,8 +169,20 @@ export function App({ source }: { source: DataSource }) {
                 ) : (
                   <>
                     <div className="stack">
-                      <ProjectMenu io={source.projects} current={project} onLoad={(name) => void loadProject(name)} />
-                      {projectMessage ? <Note kind={projectMessage.kind} text={projectMessage.text} /> : null}
+                      <ProjectMenu
+                        io={source.projects}
+                        current={projects.project}
+                        onLoad={(name) => void projects.load(name)}
+                      />
+                      {projects.project ? (
+                        <ProjektAktionen
+                          project={projects.project}
+                          dataDirLabel={source.dataDirLabel}
+                          rename={projects.rename}
+                          trash={projects.trash}
+                        />
+                      ) : null}
+                      {projects.message ? <Note kind={projects.message.kind} text={projects.message.text} /> : null}
                     </div>
                     <Eingabespalte
                       data={prices.data}
@@ -210,10 +194,12 @@ export function App({ source }: { source: DataSource }) {
                     />
                     <SaveProject
                       canSave={canSave}
-                      open={saveOpen}
-                      setOpen={setSaveOpen}
-                      defaultName={project ?? ""}
-                      save={saveProject}
+                      current={projects.project}
+                      open={projects.saveOpen}
+                      setOpen={projects.setSaveOpen}
+                      save={projects.save}
+                      saveChanges={() => void projects.saveChanges()}
+                      status={projects.status}
                     />
                   </>
                 )}

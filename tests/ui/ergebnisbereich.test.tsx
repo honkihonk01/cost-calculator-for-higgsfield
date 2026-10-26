@@ -22,14 +22,14 @@ function panel() {
 }
 
 describe("AC-F10-7 oben genau eine Antwort, alles Weitere in Reitern", () => {
-  test("AC-F10-12 oben deine Auswahl: brutto groß, netto und Credits klein, dazu die Pakete zum Kaufen", async () => {
+  test("AC-F10-12 oben deine Auswahl: brutto groß, netto klein, dazu die Pakete zum Kaufen", async () => {
     const { container } = await renderApp();
     await fillStandard();
     const top = answer();
     expect(container.querySelectorAll(".answer__value")).toHaveLength(1);
     expect(document.querySelector(".answer__value")?.textContent).toBe("374,63 €");
     expect(within(top).getByText("Seedance 2.5 Draft + 1080p über Credit-Pakete")).toBeTruthy();
-    expect(within(top).getByText(/netto 314,81 € · 5\.940 Credits Bedarf, davon 3\.940 Credits fehlend/)).toBeTruthy();
+    expect(within(top).getByText("netto 314,81 € · 3.940 Credits fehlen noch")).toBeTruthy();
     const table = within(top).getByRole("table", { name: /Zu kaufen · Paketpreise vom 09\.10\.2026/ });
     expect(
       within(table)
@@ -40,6 +40,16 @@ describe("AC-F10-7 oben genau eine Antwort, alles Weitere in Reitern", () => {
     expect(within(table).getByRole("rowheader", { name: "Zusammen brutto" })).toBeTruthy();
     // Keine Begründung, keine Schwelle oben: die stehen aufgeklappt in den Listen.
     expect(within(top).queryByText(/Ändert sich bei/)).toBeNull();
+  });
+
+  test("AC-F10-18 der Credit-Bedarf steht groß unter dem Preis, kleiner und in Sekundärfarbe", async () => {
+    await renderApp();
+    await fillStandard();
+    const credits = answer().querySelector(".answer__credits");
+    expect(credits?.textContent).toBe("5.940 Credits Bedarf");
+    // Reihenfolge in der Karte: erst Euro, dann Credits, dann netto
+    expect(credits?.previousElementSibling?.className).toContain("answer__value");
+    expect(credits?.nextElementSibling?.className).toContain("answer__meta");
   });
 
   test("AC-F10-7 zwei Reiter, immer nur einer sichtbar; Cmd+1 und Cmd+2 wechseln; keine Pässe", async () => {

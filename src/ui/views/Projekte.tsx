@@ -5,7 +5,7 @@ import { listProjectsWith, type ProjectIo, type ProjectSummary } from "../../lad
 import type { AppError } from "../../schema/index.ts";
 import { Button, Dialog, Icon, Note, SettingField } from "../components/index.ts";
 
-// Projekte in der App (SPEC F9): Projektwahl oben in der Eingabespalte, „Als Projekt speichern“ unten.
+// Projekte in der App (SPEC F9): Projektwahl oben in der Eingabespalte, Speichern unten.
 
 type ListState = { loading: boolean; projects: ProjectSummary[]; errors: AppError[] };
 
@@ -73,77 +73,90 @@ export function ProjectMenu({
 export type SaveOutcome = { ok: true } | { ok: false; exists: boolean; message: string };
 
 /**
- * Lime-Hauptaktion „Als Projekt speichern“ (B16) mit Dialog (B17) und Bestätigung (B18).
- * Existiert der Name schon, fragt der Dialog vor dem Überschreiben nach (AC-F9-3).
+ * Lime-Hauptaktion (B16) mit Dialog (B17) und Bestätigung (B18). Ohne geladenes Projekt „Als Projekt speichern“;
+ * existiert der Name schon, fragt der Dialog vor dem Überschreiben nach (AC-F9-3). Mit geladenem Projekt schreibt
+ * „Änderungen speichern“ direkt in seine Datei, „Als neues Projekt speichern“ öffnet den Dialog (AC-F9-9).
  */
 export function SaveProject({
   canSave,
+  current,
   open,
   setOpen,
-  defaultName,
   save,
+  saveChanges,
+  status,
 }: {
   canSave: boolean;
+  current: string | null;
   open: boolean;
   setOpen: (open: boolean) => void;
-  defaultName: string;
   save: (name: string, overwrite: boolean) => Promise<SaveOutcome>;
+  saveChanges: () => void;
+  status: { kind: "error" | "info"; text: string } | null;
 }) {
   const hintId = useId();
-  const [name, setName] = useState(defaultName);
+  const [name, setName] = useState("");
   const [confirming, setConfirming] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [status, setStatus] = useState("");
-  // Bei jedem Öffnen (Knopf oder Cmd+S) frisch mit dem Namen des geladenen Projekts beginnen.
+  // Bei jedem Öffnen frisch beginnen; ein neues Projekt bekommt einen neuen Namen, deshalb ist das Feld leer.
   const [wasOpen, setWasOpen] = useState(open);
   if (open !== wasOpen) {
     setWasOpen(open);
     if (open) {
-      setName(defaultName);
+      setName("");
       setConfirming(false);
       setError(null);
     }
   }
   const run = async (overwrite: boolean) => {
     const outcome = await save(name, overwrite);
-    if (outcome.ok) {
-      setOpen(false);
-      setStatus(`Gespeichert als „${name.trim()}“.`);
-    } else if (outcome.exists && !overwrite) {
-      setConfirming(true);
-    } else {
-      setError(outcome.message);
-    }
+    if (outcome.ok) setOpen(false);
+    else if (outcome.exists && !overwrite) setConfirming(true);
+    else setError(outcome.message);
   };
   const submit = (event: FormEvent) => {
     event.preventDefault();
     if (name.trim() === "") setError("Gib einen Namen für das Projekt an.");
     else void run(false);
   };
+  const title = current ? "Als neues Projekt speichern" : "Als Projekt speichern";
 
   return (
     <div className="save-project">
-      <Button
-        variant="primary"
-        onClick={() => setOpen(true)}
-        disabled={!canSave}
-        describedBy={canSave ? undefined : hintId}
-      >
-        Als Projekt speichern
-      </Button>
+      {current ? (
+        <>
+          <Button
+            variant="primary"
+            onClick={saveChanges}
+            disabled={!canSave}
+            describedBy={canSave ? undefined : hintId}
+          >
+            Änderungen speichern
+          </Button>
+          <Button variant="outline" onClick={() => setOpen(true)} disabled={!canSave}>
+            Als neues Projekt speichern
+          </Button>
+        </>
+      ) : (
+        <Button
+          variant="primary"
+          onClick={() => setOpen(true)}
+          disabled={!canSave}
+          describedBy={canSave ? undefined : hintId}
+        >
+          Als Projekt speichern
+        </Button>
+      )}
       {canSave ? null : (
         <p id={hintId} className="save-project__hint">
           Speichern geht, sobald ein Ergebnis da ist.
         </p>
       )}
-      <p className="save-project__status" aria-live="polite">
-        {status}
-      </p>
-      <Dialog
-        open={open}
-        title={confirming ? "Projekt überschreiben?" : "Als Projekt speichern"}
-        onClose={() => setOpen(false)}
-      >
+      <div aria-live="polite">
+        {status?.kind === "error" ? <Note kind="error" text={status.text} /> : null}
+        {status?.kind === "info" ? <p className="save-project__status">{status.text}</p> : null}
+      </div>
+      <Dialog open={open} title={confirming ? "Projekt überschreiben?" : title} onClose={() => setOpen(false)}>
         {confirming ? (
           <>
             <p>

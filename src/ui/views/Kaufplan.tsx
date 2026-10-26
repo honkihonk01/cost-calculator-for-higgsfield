@@ -1,7 +1,8 @@
 import { formatCredits } from "../../kern/index.ts";
 import { Zahl } from "../bewegung/index.ts";
 import { ValueRow } from "../components/index.ts";
-import { amountText, grossText, type PlanData, pricesAsOfText } from "./anzeige.ts";
+import { amountText, grossText, netText, type PlanData, pricesAsOfText } from "./anzeige.ts";
+import { DifferenzSchild } from "./DifferenzSchild.tsx";
 
 // Welche Credit-Pakete zu kaufen sind, als dezente Tabelle: Anzahl, Paket, Preis je Paket, Summe und am Ende alle
 // Pakete zusammen, brutto (SPEC Entscheidung 25). Darunter das günstigste Einzelpaket zum Vergleich.
@@ -61,6 +62,29 @@ export function PaketTabelle({ plan }: { plan: PlanData }) {
         </p>
       ) : null}
     </div>
+  );
+}
+
+/**
+ * Die Zahlen oben in der Ergebniskarte: Euro brutto groß, darunter der Credit-Bedarf ebenfalls groß, aber kleiner und
+ * in Sekundärfarbe (SPEC Entscheidung 31), dann netto und was nach dem Credit-Stand fehlt.
+ */
+export function KostenZahlen({ plan, credits }: { plan: PlanData; credits: string }) {
+  return (
+    <>
+      <p className="answer__value num">
+        <Zahl text={grossText(plan)} />
+        <DifferenzSchild gross={plan.gross} />
+      </p>
+      <p className="answer__credits num">
+        <Zahl text={`${formatCredits(credits)} Bedarf`} />
+      </p>
+      <p className="answer__meta num">
+        <Zahl
+          text={`netto ${netText(plan)}${plan.shortfall === "0" ? "" : ` · ${formatCredits(plan.shortfall)} fehlen noch`}`}
+        />
+      </p>
+    </>
   );
 }
 

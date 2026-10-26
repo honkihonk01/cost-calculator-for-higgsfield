@@ -23,11 +23,18 @@ for (const [key, file] of Object.entries(PRICE_FILES) as [PriceFileKey, string][
 const memory = new Map<string, string>();
 const memoryProjects: ProjectIo = {
   dataDirLabel: "Vorschau (nur im Arbeitsspeicher)",
-  listFiles: async () => [...memory.keys()].map((file) => file.slice(PROJECT_FOLDER.length + 1)),
+  // nur Dateien direkt im Projektordner, wie readdir; der Papierkorb ist ein Unterordner
+  listFiles: async () =>
+    [...memory.keys()].map((file) => file.slice(PROJECT_FOLDER.length + 1)).filter((file) => !file.includes("/")),
   readText: async (file) => memory.get(file) ?? null,
   dataDirExists: async () => true,
   writeAtomic: async (file, text) => {
     memory.set(file, text);
+  },
+  moveFile: async (from, to) => {
+    const text = memory.get(from);
+    if (text !== undefined) memory.set(to, text);
+    memory.delete(from);
   },
 };
 

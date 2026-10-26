@@ -3,13 +3,11 @@ import { formatCredits } from "../../kern/index.ts";
 import type { AppError } from "../../schema/index.ts";
 import { Zahl } from "../bewegung/index.ts";
 import { Note, NoteList } from "../components/index.ts";
-import { grossText, netText } from "./anzeige.ts";
-import { DifferenzSchild } from "./DifferenzSchild.tsx";
-import { PaketTabelle } from "./Kaufplan.tsx";
+import { KostenZahlen, PaketTabelle } from "./Kaufplan.tsx";
 
 // Ergebnis der Gesamtkalkulation (SPEC F15): oben die Kosten aller ausgewählten Projekte zusammen, groß brutto,
-// klein netto und Credits, mit Pakettabelle; darunter die Projekte mit ihrem Credit-Bedarf, Summe, Kontostand und
-// Fehlbetrag, damit sich nachvollziehen lässt, wie die Zahl oben entsteht.
+// darunter etwas kleiner die Credits, klein netto, mit Pakettabelle; darunter die Projekte mit ihrem Credit-Bedarf,
+// Summe, Kontostand und Fehlbetrag, damit sich nachvollziehen lässt, wie die Zahl oben entsteht.
 
 export type TotalView =
   | { state: "empty" }
@@ -44,15 +42,7 @@ export function GesamtErgebnis({ view }: { view: TotalView }) {
           </p>
           {plan ? (
             <>
-              <p className="answer__value num">
-                <Zahl text={grossText(plan)} />
-                <DifferenzSchild gross={plan.gross} />
-              </p>
-              <p className="answer__meta num">
-                <Zahl
-                  text={`netto ${netText(plan)} · ${formatCredits(result.totalCredits)} Bedarf${plan.shortfall === "0" ? "" : `, davon ${formatCredits(plan.shortfall)} fehlend`}`}
-                />
-              </p>
+              <KostenZahlen plan={plan} credits={result.totalCredits} />
               <PaketTabelle plan={plan} />
             </>
           ) : (

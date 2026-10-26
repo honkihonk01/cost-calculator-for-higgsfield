@@ -21,11 +21,14 @@ afterEach(async () => {
 const source = () => fakeSource(fixturePrices(), data.dataDir);
 const projectFile = (slug: string) => join(data.dataDir, "projekte", `${slug}.json`);
 
+// Ohne geladenes Projekt heißt der Knopf „Als Projekt speichern“, mit geladenem „Als neues Projekt speichern“.
+const SAVE_AS = /^Als (neues )?Projekt speichern$/;
+
 async function saveAs(name: string) {
   await act(async () => {
-    fireEvent.click(screen.getByRole("button", { name: "Als Projekt speichern" }));
+    fireEvent.click(screen.getByRole("button", { name: SAVE_AS }));
   });
-  const dialog = screen.getByRole("dialog", { name: "Als Projekt speichern" });
+  const dialog = screen.getByRole("dialog", { name: SAVE_AS });
   await act(async () => {
     fireEvent.change(within(dialog).getByLabelText("Projektname"), { target: { value: name } });
   });
@@ -33,7 +36,7 @@ async function saveAs(name: string) {
     fireEvent.click(within(dialog).getByRole("button", { name: "Speichern" }));
   });
   // Gespeichert wird in einen echten Ordner; fertig ist es, wenn der Namensdialog zu oder die Rückfrage da ist.
-  await waitFor(() => expect(screen.queryByRole("dialog", { name: "Als Projekt speichern" })).toBeNull());
+  await waitFor(() => expect(screen.queryByRole("dialog", { name: SAVE_AS })).toBeNull());
 }
 
 async function openProjectMenu() {
@@ -77,15 +80,27 @@ describe("AC-F9-1 in der App: speichern, neu starten, laden", () => {
     expect(copy.inputs).toEqual(saved.inputs);
   });
 
-  test("AC-F9-1 Cmd+S öffnet den Speicherdialog mit dem Namen des geladenen Projekts", async () => {
+  test("AC-F9-1 Cmd+S öffnet ohne geladenes Projekt den Speicherdialog", async () => {
     await renderApp(source());
     await fillStandard();
-    await saveAs("Die Route");
     await act(async () => {
       fireEvent.keyDown(window, { key: "s", metaKey: true });
     });
     const dialog = screen.getByRole("dialog", { name: "Als Projekt speichern" });
-    expect((within(dialog).getByLabelText("Projektname") as HTMLInputElement).value).toBe("Die Route");
+    expect((within(dialog).getByLabelText("Projektname") as HTMLInputElement).value).toBe("");
+  });
+
+  test("AC-F9-9 Cmd+S speichert Änderungen am geladenen Projekt direkt, ohne Dialog", async () => {
+    await renderApp(source());
+    await fillStandard();
+    await saveAs("Die Route");
+    await type("Versuche pro Clip", "2");
+    await act(async () => {
+      fireEvent.keyDown(window, { key: "s", metaKey: true });
+    });
+    await waitFor(() => expect(screen.getByText("Änderungen an „Die Route“ gespeichert.")).toBeTruthy());
+    expect(screen.queryByRole("dialog")).toBeNull();
+    expect(JSON.parse(await readFile(projectFile("die-route"), "utf8")).inputs.attemptsPerClip).toBe(2);
   });
 });
 

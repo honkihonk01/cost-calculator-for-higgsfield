@@ -1,11 +1,8 @@
-import { formatCredits } from "../../kern/index.ts";
 import type { PriceData, Result } from "../../schema/index.ts";
-import { Zahl } from "../bewegung/index.ts";
 import { Note, NoteList, ResultTabs } from "../components/index.ts";
-import { grossText, netText, notesIn, pathLabel, paymentText } from "./anzeige.ts";
-import { DifferenzSchild } from "./DifferenzSchild.tsx";
+import { notesIn, pathLabel, paymentText } from "./anzeige.ts";
 import { DetailsTab, PathsTab } from "./ErgebnisReiter.tsx";
-import { PaketTabelle } from "./Kaufplan.tsx";
+import { KostenZahlen, PaketTabelle } from "./Kaufplan.tsx";
 
 // Ergebnisbereich (docs/UI-RULES.md, Abschnitt A): oben genau eine Antwort, darunter Reiter für Produktionswege
 // und Details (AC-F10-7). Bei ungültigen Feldern die Meldung statt veralteter Zahlen (AC-F10-3).
@@ -80,15 +77,7 @@ function Answer({ result, rateLoading }: { result: Result; rateLoading: boolean 
             <p className="answer__title">
               {pathLabel(result, plan.pathId)} {paymentText(plan)}
             </p>
-            <p className="answer__value num">
-              <Zahl text={grossText(plan)} />
-              <DifferenzSchild gross={plan.gross} />
-            </p>
-            <p className="answer__meta num">
-              <Zahl
-                text={`netto ${netText(plan)} · ${formatCredits(plan.creditsNeeded)} Bedarf${plan.shortfall === "0" ? "" : `, davon ${formatCredits(plan.shortfall)} fehlend`}`}
-              />
-            </p>
+            <KostenZahlen plan={plan} credits={plan.creditsNeeded} />
             <PaketTabelle plan={plan} />
           </>
         ) : (

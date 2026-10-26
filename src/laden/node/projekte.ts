@@ -1,5 +1,5 @@
-import { mkdir, readdir, readFile, stat } from "node:fs/promises";
-import { join } from "node:path";
+import { mkdir, readdir, readFile, rename, stat } from "node:fs/promises";
+import { dirname, join } from "node:path";
 import type { AppError, Outcome, Project } from "../../schema/index.ts";
 import {
   listProjectsWith,
@@ -48,6 +48,10 @@ export function nodeProjectIo(dataDir: string): ProjectIo {
     writeAtomic: async (file, text) => {
       await mkdir(join(dataDir, PROJECT_FOLDER), { recursive: true });
       await writeFileAtomic(join(dataDir, file), text);
+    },
+    moveFile: async (from, to) => {
+      await mkdir(dirname(join(dataDir, to)), { recursive: true });
+      await rename(join(dataDir, from), join(dataDir, to));
     },
   };
 }

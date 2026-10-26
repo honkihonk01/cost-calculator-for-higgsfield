@@ -148,6 +148,15 @@
   font-weight: var(--weight-bold);
   letter-spacing: var(--tracking-title);
 }
+/* Credit-Bedarf unter dem Preis: groß, aber eine Stufe kleiner und in Sekundärfarbe (SPEC Entscheidung 31) */
+.answer__credits {
+  font-family: var(--font-display);
+  font-size: var(--text-28);
+  line-height: var(--leading-28);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-title);
+  color: var(--color-text-secondary);
+}
 /* Differenz-Schild neben dem Preis: schnell ein, eine Sekunde stehen, langsam aus (DifferenzSchild.tsx) */
 .differenz {
   display: inline-flex;
@@ -365,4 +374,11 @@
   font-size: var(--text-12);
   line-height: var(--leading-12);
   color: var(--color-text-secondary);
+}
+
+/* Umbenennen und Löschen des geladenen Projekts (SPEC F9) nebeneinander unter der Projektwahl */
+.project-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
 }

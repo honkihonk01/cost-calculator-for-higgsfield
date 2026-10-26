@@ -38,6 +38,7 @@ const ATOME = [
   ".answer__label",
   ".answer__title",
   ".answer__value",
+  ".answer__credits",
   ".answer__meta",
   ".buy-table caption",
   ".buy-table tr",

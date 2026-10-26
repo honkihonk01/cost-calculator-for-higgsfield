@@ -76,7 +76,8 @@ test("AC-F15-8 Projekte anhaken: Tabelle mit Bedarf je Projekt, Summe, Kontostan
   ]);
   const top = screen.getByRole("region", { name: "Kosten der Gesamtkalkulation" });
   expect(within(top).getByText("2 Projekte zusammen über Credit-Pakete")).toBeTruthy();
-  expect(within(top).getByText(/8\.910 Credits Bedarf, davon 5\.910 Credits fehlend/)).toBeTruthy();
+  expect(top.querySelector(".answer__credits")?.textContent).toBe("8.910 Credits Bedarf");
+  expect(within(top).getByText(/5\.910 Credits fehlen noch/)).toBeTruthy();
   expect(within(top).getByRole("table", { name: /Zu kaufen/ })).toBeTruthy();
 });
 

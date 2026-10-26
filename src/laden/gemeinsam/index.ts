@@ -10,3 +10,4 @@ export {
   readProjectWith,
   saveProjectWith,
 } from "./projekte-ablauf.ts";
+export { renameProjectWith, TRASH_FOLDER, trashProjectWith } from "./projekte-verwalten.ts";

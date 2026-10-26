@@ -21,6 +21,8 @@ export type ProjectIo = {
   dataDirExists(): Promise<boolean>;
   /** legt den Projektordner bei Bedarf an und schreibt atomar */
   writeAtomic(file: string, text: string): Promise<void>;
+  /** verschiebt eine Datei innerhalb des Datenordners und legt den Zielordner an; gelöscht wird nie (Papierkorb) */
+  moveFile(from: string, to: string): Promise<void>;
   /** wie der Datenordner in Meldungen heißt */
   dataDirLabel: string;
 };
@@ -135,7 +137,7 @@ export async function saveProjectWith(
   return { ok: true, value: checked.data };
 }
 
-async function readProjectFile(io: ProjectIo, file: string): Promise<Outcome<Project>> {
+export async function readProjectFile(io: ProjectIo, file: string): Promise<Outcome<Project>> {
   let text: string | null;
   try {
     text = await io.readText(file);
@@ -153,10 +155,10 @@ async function readProjectFile(io: ProjectIo, file: string): Promise<Outcome<Pro
   return parsed.success ? { ok: true, value: parsed.data } : { ok: false, errors: issuesToErrors(parsed.error, file) };
 }
 
-function invalidName(name: string): { ok: false; errors: AppError[] } {
+export function invalidName(name: string): { ok: false; errors: AppError[] } {
   return fail("invalid-name", `„${name}“ taugt nicht als Projektname. Verwende Buchstaben oder Ziffern.`);
 }
 
-function fail(code: string, message: string, file?: string): { ok: false; errors: AppError[] } {
+export function fail(code: string, message: string, file?: string): { ok: false; errors: AppError[] } {
   return { ok: false, errors: [{ code, message, ...(file === undefined ? {} : { file }) }] };
 }

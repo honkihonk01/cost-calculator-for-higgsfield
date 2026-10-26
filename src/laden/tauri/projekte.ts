@@ -24,4 +24,11 @@ export const appProjectIo: ProjectIo = {
     await writeTextFile(temporary, text, HOME);
     await rename(temporary, path, { oldPathBaseDir: HOME.baseDir, newPathBaseDir: HOME.baseDir });
   },
+  moveFile: async (from, to) => {
+    await mkdir(`${DATA_DIR}/${to.slice(0, to.lastIndexOf("/"))}`, { ...HOME, recursive: true });
+    await rename(`${DATA_DIR}/${from}`, `${DATA_DIR}/${to}`, {
+      oldPathBaseDir: HOME.baseDir,
+      newPathBaseDir: HOME.baseDir,
+    });
+  },
 };
